@@ -38,7 +38,7 @@ module TB_MOD_Conversor_Comp2(
     
     // stimulus
     initial begin
-        A = 000000;
+        assign A = 000000;
     end
     
     always #1 A[0] = ~A[0];

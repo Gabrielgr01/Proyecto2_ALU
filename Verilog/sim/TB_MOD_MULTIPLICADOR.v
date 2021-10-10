@@ -3,7 +3,7 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 10/10/2021 01:42:45 PM
+// Create Date: 10/10/2021 04:40:42 PM
 // Design Name: 
 // Module Name: TB_MOD_MULTIPLICADOR
 // Project Name: 
@@ -25,18 +25,24 @@ module TB_MOD_MULTIPLICADOR(
     );
     
     // inputs
-    wire [5:0] A , B;
+    reg [5:0] A , B;
     
     // outputs
-    reg [5:0] M, OF;
+    wire [5:0] M;
+    wire OF;
     
     // instantiate
-    MOD_MULTIPLICADOR UUT (A, B, M, OF);
+    MOD_MULTIPLICADOR UUT (
+        .A(A), 
+        .B(B), 
+        .M(M), 
+        .OF_MUL(OF)
+        );
     
     // stimulus
     initial begin
-        A = 6'b000000;
-        B = 6'b000000;
+        A = 6'd0;
+        B = 6'd0;
     end
     
     always #1 A[0] = ~A[0];
