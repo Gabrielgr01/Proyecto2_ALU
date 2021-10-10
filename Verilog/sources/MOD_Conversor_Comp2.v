@@ -31,7 +31,6 @@ module MOD_Conversor_Comp2(
     wire [6:0]suma;
     assign suma = comp + 6'b000001;
     
-    //Mux_2a1 mux_conv (suma[6] ,suma[5:0], 6'b100000, A_convertido);
     assign A_convertido = suma[5:0];
     
 endmodule
