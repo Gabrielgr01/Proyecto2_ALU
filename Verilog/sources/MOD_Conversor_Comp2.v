@@ -25,15 +25,13 @@ module MOD_Conversor_Comp2(
     output [5:0] A_convertido
     );
     
-    assign A[0] = ~A[0];
-    assign A[1] = ~A[1];
-    assign A[2] = ~A[2];
-    assign A[3] = ~A[3];
-    assign A[4] = ~A[4];
-    assign A[5] = ~A[5];
+    wire [5:0] comp;
+    assign comp = ~A;
 
     wire [6:0]suma;
-    assign suma = A + 000001;
+    assign suma = comp + 6'b000001;
+    
+    //Mux_2a1 mux_conv (suma[6] ,suma[5:0], 6'b100000, A_convertido);
     assign A_convertido = suma[5:0];
     
 endmodule
