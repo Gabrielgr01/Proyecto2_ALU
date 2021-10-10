@@ -3,7 +3,7 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 10/10/2021 01:05:15 PM
+// Create Date: 10/10/2021 04:36:44 PM
 // Design Name: 
 // Module Name: MOD_Conversor_Comp2
 // Project Name: 
@@ -29,7 +29,7 @@ module MOD_Conversor_Comp2(
     assign comp = ~A;
 
     wire [6:0]suma;
-    assign suma = comp + 6'b000001;
+    assign suma = comp + 6'd1;
     
     assign A_convertido = suma[5:0];
     

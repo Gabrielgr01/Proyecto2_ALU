@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 10/07/2021 11:39:35 PM
+// Create Date: 10/10/2021 04:36:44 PM
 // Design Name: 
-// Module Name: Mux_2a1
+// Module Name: Mux_2a1 
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -22,10 +22,10 @@
 
 module Mux_2a1(
     input SEL,
-    input [5:0] Dato,
+    input [5:0] Dato1, Dato2,
     output [5:0] Y
     );
     
-    assign Y = SEL ? ~Dato : Dato;
+    assign Y = SEL ? Dato2 : Dato1;
     
 endmodule

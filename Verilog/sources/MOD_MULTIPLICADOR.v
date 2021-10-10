@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 10/10/2021 01:00:59 PM
+// Create Date: 10/10/2021 04:36:44 PM
 // Design Name: 
-// Module Name: MOD_MULTIPLICADOR
+// Module Name: MOD_MULTIPLICADOR 
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -39,10 +39,11 @@ module MOD_MULTIPLICADOR (
     // Multiplicacion positiva
     wire [9:0] mult_pos_completa;
     wire [5:0] mult_pos_incompleta;
-    assign mult_pos_completa = A_conv * B_conv;
-    assign mult_pos_incompleta = mult_pos_completa[5:0];
+    assign mult_pos_completa = A_conv[4:0] * B_conv[4:0];
+    assign mult_pos_incompleta[4:0] = mult_pos_completa[4:0];
+    assign mult_pos_incompleta[5] = 1'b0;
     
-    // Conversion complemento a 2 para el resultado de la multiplicaciÃ³n positiva
+    // Conversion complemento a 2 para el resultado de la multiplicación positiva
     wire [5:0] mult_comp2; 
     wire SEL_conv_mult;
     assign SEL_conv_mult = A[5] ^ B[5];
