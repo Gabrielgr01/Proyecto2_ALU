@@ -48,7 +48,7 @@ module MOD_MULTIPLICADOR (
     
     // Bandera Overflow (OF)
     wire OF_or;
-    assign OF_or =  mult_pos_completa[6]^ mult_pos_completa[7]^ mult_pos_completa[8]^ mult_pos_completa[9]^ mult_pos_completa[10]^ mult_pos_completa[11];
+    assign OF_or =  mult_pos_completa[6]^ mult_pos_completa[7]^ mult_pos_completa[8]^ mult_pos_completa[9];
     assign OF_MUL = OF_or ? 1'b1 : 1'b0;
     
 endmodule
