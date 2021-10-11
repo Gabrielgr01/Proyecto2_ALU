@@ -1,11 +1,11 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
-// Engineer: Gabriel O. González Rodríguez
+// Engineer: 
 // 
-// Create Date: 10/10/2021 04:36:44 PM
+// Create Date: 10/10/2021 05:53:50 PM
 // Design Name: 
-// Module Name: MOD_Conversor_Comp2
+// Module Name: MOD_QUINTUPLICADOR
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,17 +20,17 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module MOD_Conversor_Comp2(
-    input [5:0] A,
-    output [5:0] A_convertido
+module MOD_QUINTUPLICADOR(
+    input signed [5:0] A,
+    output[11:0] Y
     );
     
-    wire [5:0] comp;
-    assign comp = ~A;
+    wire[5:0] B = 6'd5;
+    reg signed [11:0] result;
 
-    wire [6:0]suma;
-    assign suma = comp + 6'd1;
+    always @A
+        result <= A*$signed(B);
     
-    assign A_convertido = suma[5:0];
+    assign Y = result[11:0];
     
 endmodule

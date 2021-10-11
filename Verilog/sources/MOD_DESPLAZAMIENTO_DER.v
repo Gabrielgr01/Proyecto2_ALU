@@ -1,11 +1,11 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
-// Engineer: Gabriel O. González Rodríguez
+// Engineer: 
 // 
-// Create Date: 10/10/2021 04:36:44 PM
+// Create Date: 10/10/2021 05:59:50 PM
 // Design Name: 
-// Module Name: MOD_Conversor_Comp2
+// Module Name: MOD_DESPLAZAMIENTO_DER
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,17 +20,16 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module MOD_Conversor_Comp2(
+module MOD_DESPLAZAMIENTO_DER(    
     input [5:0] A,
-    output [5:0] A_convertido
+    output [5:0] Y
     );
     
-    wire [5:0] comp;
-    assign comp = ~A;
-
-    wire [6:0]suma;
-    assign suma = comp + 6'd1;
-    
-    assign A_convertido = suma[5:0];
+    assign Y[0] = A[1];
+    assign Y[1] = A[2];
+    assign Y[2] = A[3];
+    assign Y[3] = A[4];
+    assign Y[4] = A[5];
+    assign Y[5] = 0;
     
 endmodule
