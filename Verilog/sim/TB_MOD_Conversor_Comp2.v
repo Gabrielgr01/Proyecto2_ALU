@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
-// Engineer: 
+// Engineer: Gabriel O. González Rodríguez
 // 
 // Create Date: 10/10/2021 02:02:43 PM
 // Design Name: 
