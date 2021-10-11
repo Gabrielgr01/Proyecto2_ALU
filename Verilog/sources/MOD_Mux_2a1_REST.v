@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 10/08/2021 12:34:18 AM
+// Create Date: 10/10/2021 07:31:47 PM
 // Design Name: 
-// Module Name: Sum_Rest_6bit_tb
+// Module Name: MOD_Mux_2a1_REST
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,23 +20,13 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Sum_Rest_6bit_tb(
+module MOD_Mux_2a1_REST(
+    input SEL,
+    input [5:0] Dato,
+    output [5:0] Y
     );
-    reg SEL;
-    reg signed [5:0] A;
-    reg signed [5:0] B;
-    wire [5:0] Y;
-    wire Cout;
     
-    //implementation 
-    Sum_Rest_6bit UUT (SEL,A,B,Y,Cout);
-    //Stimulus
-    initial begin
-    SEL=1;// quiero restar
-    A = 6'b011110; //-20
-    B = 6'b001111; //-15
-    //R=-5
-    end
+    assign Y = SEL ? ~Dato : Dato; //Niega los bits si SEL = 1
     
-   
 endmodule
+  

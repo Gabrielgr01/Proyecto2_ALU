@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 10/08/2021 12:22:04 AM
+// Create Date: 10/10/2021 07:36:39 PM
 // Design Name: 
-// Module Name: Mux_2a1_Cin
+// Module Name: MOD_Mux_2a1_SumRest
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,11 +20,11 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Mux_2a1_Cin(
+module MOD_Mux_2a1_SumRest(
     input SEL,
     output Y
     );
     
-    assign Y = SEL ? 1'b1 : 1'b0;
+    assign Y = SEL ? 1'b1 : 1'b0; //EL acarreo de entrada del sumador es 0 o 1 según la operación por realizar.
 
 endmodule

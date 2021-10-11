@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 10/07/2021 11:39:35 PM
+// Create Date: 10/10/2021 07:45:58 PM
 // Design Name: 
-// Module Name: Not
+// Module Name: TB_MOD_Mux_2a1_REST
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,9 +20,19 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Not(
-    input IN,
-    output OUT
+module TB_MOD_Mux_2a1_REST(
     );
-    assign OUT=~IN;
+    reg SEL;
+    reg [5:0] Dato;
+    wire [5:0] Y;
+    
+    MOD_Mux_2a1_REST UUT (SEL,Dato,Y);
+    
+    initial begin
+    SEL=0;
+    Dato=6'd9;
+    
+    #40 SEL = 1;
+    end
+    
 endmodule

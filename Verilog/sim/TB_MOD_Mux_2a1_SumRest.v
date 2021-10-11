@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 10/08/2021 01:02:14 PM
+// Create Date: 10/10/2021 07:46:44 PM
 // Design Name: 
-// Module Name: Mux_2a1_Cin_tb
+// Module Name: TB_MOD_Mux_2a1_SumRest
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,12 +20,12 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Mux_2a1_Cin_tb(
+module TB_MOD_Mux_2a1_SumRest(
     );
     reg SEL;
     wire Y;
     
-    Mux_2a1_Cin UUT (SEL,Y);
+    MOD_Mux_2a1_SumRest UUT (SEL,Y);
     
     initial begin
     SEL = 0;
