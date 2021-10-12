@@ -44,7 +44,7 @@ module TB_MOD_MULTIPLICADOR(
         A = 6'd0;
         B = 6'd0;
     end
-    
+
     always #1 A[0] = ~A[0];
     always #2 A[1] = ~A[1];
     always #4 A[2] = ~A[2];
@@ -58,5 +58,5 @@ module TB_MOD_MULTIPLICADOR(
     always #512 B[3] = ~B[3];
     always #1024 B[4] = ~B[4];
     always #2048 B[5] = ~B[5];
-    
+
 endmodule

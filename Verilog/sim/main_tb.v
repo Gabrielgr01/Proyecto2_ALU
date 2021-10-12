@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 10/10/2021 07:42:13 PM
+// Create Date: 10/11/2021 09:56:08 PM
 // Design Name: 
-// Module Name: TB_MOD_SUM_REST_6b
+// Module Name: main_tb
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,37 +20,38 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module TB_MOD_SUM_REST_6b(
+module main_tb(
+
     );
     
     // inputs
-    reg SEL;
-    reg signed [5:0] A;
-    reg signed [5:0] B;
-    
-    // outputs
-    wire signed [5:0] Y;
-    //wire Cout;
-    wire OF_SUM_REST;
+    reg [2:0] SEL;
+    reg [5:0] A, B;
     
     // variables intermedias
     reg [5:0] A_pos;
     
-    //implementation 
-    MOD_SUM_REST_6b UUT (SEL, A, B, Y, OF_SUM_REST);
+    // outputs
+    wire [5:0] Y;
+    wire ZF, PF, OF;
     
-    //Stimulus
+    // instantiate
+    main UUT (SEL, A, B, Y, ZF, PF, OF);
+
+    // stimulus
     initial begin
-        SEL = 1'b0;
+        SEL = 3'b000;
         A = 6'sd0;
         B = 6'sd0;
         A_pos = 6'sd0;
     end
     
-    always #10 SEL = ~SEL;
+    always #10 SEL[0] = ~SEL[0];
+    always #20 SEL[1] = ~SEL[1];
+    always #40 SEL[2] = ~SEL[2];
     
     always #10 B = $urandom%30;
     always #10 A_pos = $urandom%30;
     always #10 A = $signed(-A_pos);
-   
+    
 endmodule
