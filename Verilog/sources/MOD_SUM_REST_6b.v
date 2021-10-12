@@ -21,26 +21,27 @@
 
 
 module MOD_SUM_REST_6b(
-    input SEL, //Corresponde a SEL[1] de la ALU
+    input SEL, //Corresponde a SEL[1] de la ALU; 
+               // Según el valor de SEL, Cin en el sumador es 0 o 1
     input signed [5:0] A,
     input signed [5:0] B,
-    output [5:0] Y,
-    output Cout
+    output signed [5:0] Y,
+    output OF_SUM_REST
     );
     wire [5:0] caso_Bneg;
-    wire caso_Cin;
+    wire Cout;
     
     MOD_Mux_2a1_REST complemento_B (SEL, B, caso_Bneg); //Según el valor de SEL se niega B o no
-    MOD_Mux_2a1_SumRest Sum_Rest (SEL, caso_Cin); // Según el valor de SEL, Cin en el sumador es 0 o 1
      
     reg signed [6:0] Sum;
     
     always @*
     begin
-    Sum = A + caso_Bneg + caso_Cin;
+    Sum = A + caso_Bneg + SEL;
     end
 
     assign Y = Sum[5:0];
     assign Cout = Sum[6];
+    assign OF_SUM_REST = (~A[5] & ~caso_Bneg[5] & Sum[5]) | (A[5] & caso_Bneg[5] & ~Sum[5]);
     
 endmodule

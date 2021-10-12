@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 10/10/2021 05:53:50 PM
+// Create Date: 10/11/2021 02:29:41 PM
 // Design Name: 
-// Module Name: MOD_QUINTUPLICADOR
+// Module Name: MOD_BANDERA_PF
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,20 +20,12 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module MOD_QUINTUPLICADOR(
-    input signed [5:0] A,
-    output[8:0] Y,
-    output OF
+module MOD_BANDERA_PF(
+    input [5:0] Dato,
+    output PF
     );
     
-    wire[5:0] B = 6'd5;
-    reg signed [8:0] result;
-
-    always @A
-        result <= A*$signed(B);
-    
-    assign Y = result[8:0];
-    
-    assign OF = Y[6] ^ Y[5];
+    assign PF = ~(Dato[0]^Dato[1]^Dato[2]^Dato[3]^Dato[4]^Dato[5]);
     
 endmodule
+

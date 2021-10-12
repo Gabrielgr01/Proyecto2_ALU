@@ -24,20 +24,21 @@ module TB_MOD_QUINTUPLICADOR(
 
     );
     
-    // inputs
+     // inputs
     reg[5:0] A;
     
     // outputs
-    wire[11:0] F;
+    wire[8:0] F;
+    wire OF;
     
     // instantiate
-    MOD_QUINTUPLICADOR quintu(A, F);
+    MOD_QUINTUPLICADOR quintu (A, F, OF);
         
     // stimulus
     initial begin
-        A = -6'sd2;
+        A = -6'sd6;
     end
     
-    always #80 A = $urandom%10;
+    always #80 A = $urandom%20;
     
 endmodule
