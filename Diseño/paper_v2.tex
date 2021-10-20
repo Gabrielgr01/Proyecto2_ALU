@@ -15,27 +15,24 @@
 
 \renewcommand\IEEEkeywordsname{Palabras clave}
 
-\author{\IEEEauthorblockN{Emmanuel Naranjo-Blanco, Gabriel González-Rodríguez, Jose Fabio Navarro-Naranjo, Adrián Dittel-Retana, David Rodríguez-Camacho}
+\author{\IEEEauthorblockN{Adrián Dittel-Retana, Gabriel O. González-Rodríguez, Emmanuel Naranjo-Blanco, Jose Fabio Navarro-Naranjo, David Rodríguez-Camacho}
 
-\IEEEauthorblockA{naranjo760emm@estudiantec.cr}
+\IEEEauthorblockA{emailEstudiante1@estudiantec.cr}
 \IEEEauthorblockA{gabrielgr01@estudiantec.cr}
-\IEEEauthorblockA{emailEstudiante2@estudiantec.cr}
-\IEEEauthorblockA{emailEstudiante2@estudiantec.cr}
-\IEEEauthorblockA{emailEstudiante2@estudiantec.cr}
+\IEEEauthorblockA{naranjo760emm@estudiantec.cr}
+\IEEEauthorblockA{emailEstudiante4@estudiantec.cr}
+\IEEEauthorblockA{emailEstudiante5@estudiantec.cr}
 \IEEEauthorblockA{\\Área Académica de Ingeniería Mecatrónica}
 \IEEEauthorblockA{\\Instituto Tecnológico de Costa Rica}
 }
 
 % The paper headers
-\markboth{Naranjo, González, Navarro, Dittel, Rodríguez, \titlepaper}%
+\markboth{Dittel, González, Naranjo, Navarro, Rodríguez, \titlepaper}%
 {Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for Journals}
 
 \IEEEtitleabstractindextext{%
 \begin{abstract}
-
-La Unidad Aritmética Lógica (ALU) consiste en una parte esencial de la unidad central de procesamiento, encargada de realizar operaciones lógicas y aritméticas para cumplir instrucciones dentro de un sistema computacional. En el presente proyecto de laboratorio se presentará una propuesta para el diseño de una ALU que lleva a cabo siete operaciones (lógicas y matemáticas), además de los resultados obtenidos tras su ejecución. La solución a la propuesta se basó fundamentalmente en el uso de lógica combinacional, y a nivel de diseño se utilizó el método de diseño modular, en donde se divide le sistema en subsistemas más pequeños, llamados módulos, a los cuales se les encuentra una solución individual, y reutilizable.  Posteriormente se integran las soluciones para cada módulo y se le agregan las distintas banderas como parte de las restricciones del proyecto. Una vez finalizado el experimento, se llega a la conclusión principal del proyecto: Se verificó mediante el lenguaje de descripción de hardware (HDL), y su implementación en la placa de desarrollo BASYS 3, el correcto funcionamiento de la ALU propuesta mediante la estructura de diseño planteada. Además, de la simulación se obtuvo un bajo consumo de potencia (5.576W) y un LUT del 1\%, lo que significa que hubo un bajo consumo de área.
-
-
+La Unidad Aritmética Lógica (ALU) consiste en una parte esencial de la unidad central de procesamiento, encargada de realizar operaciones lógicas y aritméticas para cumplir instrucciones dentro de un sistema computacional. En el presente proyecto de laboratorio se presentará una propuesta para el diseño de una ALU que lleva a cabo siete operaciones (lógicas y matemáticas), además de los resultados obtenidos tras su ejecución. La solución a la propuesta se basó fundamentalmente en el uso de lógica combinacional, y a nivel de diseño se utilizó el método de diseño modular, en donde se divide le sistema en subsistemas más pequeños, llamados módulos, a los cuales se les encuentra una solución individual, y reutilizable.  Posteriormente se integran las soluciones para cada módulo y se le agregan las distintas banderas como parte de las restricciones del proyecto. Una vez finalizado el experimento, se llega a la conclusión principal del proyecto: Se verificó mediante el lenguaje de descripción de hardware (HDL), y su implementación en la placa de desarrollo BASYS 3, el correcto funcionamiento de la ALU propuesta mediante la estructura de diseño planteada. Además, de la simulación se obtuvo, para la FPGA utilizada, un bajo consumo de potencia (5.576W) y una utilización del LUT (Look Up Table) de 0.33\%, lo que significa que también hubo un bajo consumo de memoria.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -100,12 +97,71 @@ En las siguientes secciones se detallará el proceso de diseño junto con los di
 
 \section{DISEÑO DE LA ALU}
 
-A continuación se describe el proceso realizado para el diseño de la ALU anteriormente descrita.
+Para el desarrollo de la ALU anteriormente descrita, se utilizó un diseño modular, desarrollado y ejemplificado a través de diagramas de primer, segundo y tercer nivel, \textbf(AGREGAR: ver anexo). 
 
-%% Primer nivel
+Las restricciones previamente definidas para el proyecto son las siguiente:
+\begin{itemize}
+    \item Implementar todas las operaciones presentes en la tabla \ref{tab:operaciones}.
+    \item Para las entradas de datos, debe permitir dos operandos (A y B) con un tamaño de palabra de 6 bits cada una y un selector (SEL) de 3 bits.
+    \item Para la salida de datos, el resultado (Y) debe de tener también un tamaño de palabra de 6 bits.
+    \item La ALU debe operar bajo el sistema complemento a 2.
+    \item Deben implementarse 3 banderas de salida: cero (ZF), paridad par (PZ) y desbordamiento (OF).
+\end{itemize}
+
+Tomando en cuenta lo anterior, a continuación se presenta diseño realizado clasificado en las tres etapas del diseño modular (primero, segundo y tercer nivel).
 
 
-%% 
+\subsection{PRIMER NIVEL}
+En la figura \ref{fig:diagrama_1nivel} se muestra el diagrama de primer nivel formado a partir de las restricciones del proyecto.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.8 \columnwidth]{Imagenes/diagrama_1nivel}
+	\caption{ALU: Diagrama de primer nivel.}
+	\label{fig:diagrama_1nivel}
+\end{figure}
+
+
+\subsection{SEGUNDO NIVEL}
+En esta sección se decidió asignarle un módulo a cada operación descrita en la tabla \ref{tab:operaciones}, con excepción de las operaciones de suma y resta, que se unieron en un mismo módulo. Luego, se juntan por medio de un multiplexor 8 a 1, encargado de controlar cuál resultado de las operaciones se transmite a la salida del sistema como Y.
+
+Cada uno de estos módulos tiene como entradas a A y a B, y como salida al resultado de la operación correspondiente (de 6 bits también). Además, las operaciones de Sumador y restador, Multiplicador con signo y Quintuplicador, poseen una salida extra correspondiente a la bandera de OF, las cuales se toman como entrada en el módulo encargado de ejecutar la bandera OF del sistema.
+
+Para finalizar, se agregaron los dos módulos faltantes (para las banderas ZF y PF), los cuales tienen a Y como entrada.
+
+\textbf(AGREGAR: ver anexo). 
+
+
+\subsection{TERCER NIVEL}
+A continuación se describe el diseño realizado para cada uno de los módulos propuestos en la sección anterior.
+
+\subsubsection{Bandera ZF}
+Para la bandera de cero, o la “Zero Flag”, se colocó una compuerta del tipo NOR que capte todos los bits de salida del resultado de las operaciones, de modo que (al ser una compuerta NOR) arroje un 1 únicamente cuando todos los bits de Y sean 0.
+
+\subsubsection{Bandera PF}
+Para la bandera de paridad par se utilizó una compuerta XNOR, la cual recibe como entrada todos los bits del resultado Y. Debido a su funcionamiento, provocará que la bandera se active (1 lógico) cuando la cantidad de bits iguales a 1 en la entrada sea par.
+
+\subsubsection{Bandera OF}
+Como se mencionó en la sección anterior, se toman todas las banderas de OF a la salida de las operaciones que la poseen y se utiliza como entrada para este módulo, que corresponde a un multiplexor 8 a 1, el cual usa el mismo selector del multiplexor que saca el bus de datos de las operaciones. De esta manera, se conecta la bandera OF del sistema a la salida de este multiplexor, y se refleja el desbordamiento de la operación que se está realizando. 
+
+Es importante mencionar que para las operaciones lógicas (AND, OR, XOR, Desplazamiento), el Over Flow siempre es 0, por este motivo, las primeras 4 entradas del multiplexor se conectan a tierra. 
+
+Por último, como se diseñó un único módulo para las operaciones de suma y resta, y como la bandera OF del módulo refleja el desbordamiento de la operación que se está realizando, las entradas 4 y 6 del multiplexor se encuentran en corto circuito con la bandera OF a la salida del circuito Sumador/Restador.
+
+\subsubsection{XOR}
+
+\subsubsection{AND}
+
+\subsubsection{OR}
+
+\subsubsection{Desplazamiento lógico a la derecha}
+
+\subsubsection{Sumador con signo y Restador con signo}
+
+\subsubsection{Multiplicador con signo}
+
+\subsubsection{Quintuplicador con signo}
+
 
 %% Esto se tomó del  abstract, siento que es muy específico para utilizarlo ahí, pero puede usarse ya en la sección donde se describe el diseño
 \begin{comment}
