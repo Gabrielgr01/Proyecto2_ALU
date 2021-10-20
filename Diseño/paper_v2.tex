@@ -148,6 +148,7 @@ Es importante mencionar que para las operaciones lógicas (AND, OR, XOR, Desplaz
 Por último, como se diseñó un único módulo para las operaciones de suma y resta, y como la bandera OF del módulo refleja el desbordamiento de la operación que se está realizando, las entradas 4 y 6 del multiplexor se encuentran en corto circuito con la bandera OF a la salida del circuito Sumador/Restador.
 
 \subsubsection{XOR}
+Para esta operación se implementó el uso de 6 compuertas XOR, las cuales comparan los bits de A contra los de B en el orden de significancia, es decir, la primera compuerta XOR compara el bit A0 con el bit B0, la segunda compuerta compara el bit A1 con el bit B1, y así sucesivamente.
 
 \subsubsection{AND}
 
@@ -172,29 +173,23 @@ Por último, con otro multiplexor 2 a 1, se decide si transmitir como resultado 
 \subsubsection{Quintuplicador con signo}
 
 
-%% Esto se tomó del  abstract, siento que es muy específico para utilizarlo ahí, pero puede usarse ya en la sección donde se describe el diseño
-\begin{comment}
-Parte del problema por resolver consiste en el uso de componentes combinacionales, para lo cual se dispuso de un multiplexor de ocho entradas como el encargado de gobernar las operaciones.
-
-se realizó una partición por módulos, lo cual consiste en estructurar la descripción del proyecto en secciones definidas, cada una con su respectivo proceso de diseño y codificación en el HDL Verilog.
-
-Posteriormente se integró cada solución propuesta en un proyecto principal denominado main, al cual se le ajustaron los cambios correspondientes y se le agregó las distintas banderas como parte de las restricciones del proyecto.
-\end{comment}
-%%
-
 \section{IMPLEMENTACIÓN Y ANÁLISIS DE RESULTADOS}
 
 
 \section{CONCLUSIONES}
 A partir de este presente trabajo, se logró concluir lo siguiente.
 \begin{itemize}
-    \item El diseño modular consiste en un mecanismo ventajoso debido a que facilita la construcción de sistemas digitales de mayor complejidad. Además, facilita la depuración en caso de cometer un error.
+    \item El diseño propuesto realiza todas las operaciones lógicas y aritmeticas implementadas de forma correcta.
+    \item El diseño propuesto obtuvo un bajo consumo de potencia (5.576W) para la FPGA BASYS 3 Artix-7.
+    \item El diseño propuesto obtuvo un bajo consumo de memoria, 0.33\% del LUT, para la FPGA BASYS 3 Artix-7.
 \end{itemize}
+
 
 \section{RECOMENDACIONES}
 Para realizar exitosamente el proyecto es necesario cumplir una serie de recomendaciones.
 \begin{itemize}
-    \item Es indispensable la partición del problema en subsistemas por dos razones, para familiarizarse con los estándares de diseño y comprender el proceso de solucionar sistemas digitales complejos que por medio de otras herramientas como tablas de verdad o funciones lógicas no se podría, o se volvería innecesariamente complicado.
+    \item Es indispensable la partición del problema en subsistemas (diseño modular) por dos razones, para familiarizarse con los estándares de diseño y para comprender el proceso de solucionar sistemas digitales complejos que por medio de otras herramientas como tablas de verdad o funciones lógicas únicamente, no se podría, o se volvería innecesariamente complicado.
+    \item La utilización de diseño modular facilita considerablemente la depuración en caso de cometer un error.
 \end{itemize}
 
 
