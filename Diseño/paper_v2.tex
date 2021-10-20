@@ -97,7 +97,7 @@ En las siguientes secciones se detallará el proceso de diseño junto con los di
 
 \section{DISEÑO DE LA ALU}
 
-Para el desarrollo de la ALU anteriormente descrita, se utilizó un diseño modular, desarrollado y ejemplificado a través de diagramas de primer, segundo y tercer nivel, \textbf(AGREGAR: ver anexo). 
+Para el desarrollo de la ALU anteriormente descrita, se utilizó un diseño modular, desarrollado y ejemplificado a través de diagramas de primer, segundo y tercer nivel. \textbf{AGREGAR: ver anexos}
 
 Las restricciones previamente definidas para el proyecto son las siguiente:
 \begin{itemize}
@@ -108,7 +108,7 @@ Las restricciones previamente definidas para el proyecto son las siguiente:
     \item Deben implementarse 3 banderas de salida: cero (ZF), paridad par (PZ) y desbordamiento (OF).
 \end{itemize}
 
-Tomando en cuenta lo anterior, a continuación se presenta diseño realizado clasificado en las tres etapas del diseño modular (primero, segundo y tercer nivel).
+Tomando en cuenta lo anterior, a continuación se presenta el diseño realizado clasificado en las tres etapas del diseño modular (primero, segundo y tercer nivel).
 
 
 \subsection{PRIMER NIVEL}
@@ -125,12 +125,11 @@ En la figura \ref{fig:diagrama_1nivel} se muestra el diagrama de primer nivel fo
 \subsection{SEGUNDO NIVEL}
 En esta sección se decidió asignarle un módulo a cada operación descrita en la tabla \ref{tab:operaciones}, con excepción de las operaciones de suma y resta, que se unieron en un mismo módulo. Luego, se juntan por medio de un multiplexor 8 a 1, encargado de controlar cuál resultado de las operaciones se transmite a la salida del sistema como Y.
 
-Cada uno de estos módulos tiene como entradas a A y a B, y como salida al resultado de la operación correspondiente (de 6 bits también). Además, las operaciones de Sumador y restador, Multiplicador con signo y Quintuplicador, poseen una salida extra correspondiente a la bandera de OF, las cuales se toman como entrada en el módulo encargado de ejecutar la bandera OF del sistema.
+Cada uno de estos módulos tiene como entradas a A y a B, y como salida al resultado de la operación correspondiente (de 6 bits también). Además, las operaciones de Sumador y restador, Multiplicador y Quintuplicador, poseen una salida extra correspondiente a la bandera de OF, las cuales se toman como entradas en el módulo encargado de ejecutar la bandera OF del sistema.
 
 Para finalizar, se agregaron los dos módulos faltantes (para las banderas ZF y PF), los cuales tienen a Y como entrada.
 
-\textbf(AGREGAR: ver anexo). 
-
+\textbf{AGREGAR: ver anexo de diagrama de segundo nivel}. 
 
 \subsection{TERCER NIVEL}
 A continuación se describe el diseño realizado para cada uno de los módulos propuestos en la sección anterior.
@@ -159,6 +158,16 @@ Por último, como se diseñó un único módulo para las operaciones de suma y r
 \subsubsection{Sumador con signo y Restador con signo}
 
 \subsubsection{Multiplicador con signo}
+Para el diseño del multiplicador se utilizó el mismo algoritmo que se utilizaría para resolver una multiplicación binaria en complemento a dos a mano. Primero, se hace la conversión de complemento a 2 a binario natural para los operandos que tengan signo negativo. Segundo, se realiza la multiplicación binaria habitual con ambos operandos en binario natural. Y tercero, se hace una comprobación, por “ley de signos”, para determinar si el resultado debe de tener signo negativo o positivo.
+
+Se hizo un módulo para el conversor de complemento a 2 / Binario natural, en el cual se invierte cada bit del dato y luego se le suma uno. Este algoritmo funciona para hacer la conversión en cualquiera de las dos direcciones. Luego, mediante un multiplexor 2 a 1 se elije si transmitir el dato original o su conversión al módulo de multiplicación. La elección se realiza a partir del bit más significativo del dato, que se toma como selector. Al corresponder este al signo, si es positivo (0 lógico) se transmite el dato original y si es negativo (1 lógico) se transmite al conversión.
+
+Se realiza lo anterior para ambos operandos y se procede a realizar la multiplicación en binario natural. Este módulo se construyó a partir de sumadores \textbf{AGREGAR: ver anexo detalle multiplicador}.
+
+Por último, con otro multiplexor 2 a 1, se decide si transmitir como resultado del multiplicador el resultado de la multiplicación o su complemento a 2. Para realizar esta elección se toman el bit más significativo de cada operando como entrada de una compuerta XOR, y la salida se conecta al selector. De esta forma si el signo de los operandos es diferente, se transmite el complemento a 2 (resultado negativo), y si es igual, se transmite el resultado sin convertir (resultado positivo).
+
+\textbf{AGREGAR: ver anexo diagrama 3er nivel multiplicador}.
+
 
 \subsubsection{Quintuplicador con signo}
 
@@ -189,38 +198,24 @@ Para realizar exitosamente el proyecto es necesario cumplir una serie de recomen
 \end{itemize}
 
 
+\section{ANEXOS}
+Al final de este documento se presentan los diagramas de primer, segundo y tercer nivel propuestos para la integración del diseño de la ALU. 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Nota: lo dejo comentado porque me parece que no hace falta mencionarlo ya que en los diagramas viene el número de página y el nombre, y además se agregan en orden. Es más que todo para ahorrar espacio
 \begin{comment}
-
-Ejemplos:
-
-\begin{table}[htb]
-  \begin{center}
-    \caption{Filter bank's output's STD error per band for an impulsive input signal, tested against BeagleBoard's output for the same input signal. Worst case is band 5, close to a 4\% STD error.}
-    \label{tab:filter-error}
-    \begin{tabular}{c | c | c | c | c | c }
-      \hline
-      Band & 1 & 2 & 3 & 4 & 5 \\
-      \hline
-       STD & 0.0090 & 0.0097 & 0.0166 & 0.0291 & 0.0389 \\
-      \hline
-    \end{tabular}
-  \end{center}
-\end{table}
-
-
-\begin{figure}[hbtp]
-	\centering
-	\includegraphics[width = \columnwidth]{Imagenes/ALU}
-	\caption[]{Sample of results from bands 1 and 8 from the Verilog version of the filter bank, compared against data from the BeagleBoard's filter version.}
-	\label{fig:FiguraCircuito}
-\end{figure}
-
+    El índice de los diagramas es el siguiente:
+    \begin{itemize}
+        \item Página 1. Diagrama de primer nivel.
+        \item Página 2. Diagrama de segundo nivel.
+        \item Página 3. Diagrama de tercer nivel: XOR, AND, OR y desplazamiento a la derecha.
+        \item Página 4. Diagrama de tercer nivel: Banderas de Zero, Paridad, y de Desbordamiento.
+        \item Página 5. Diagrama de tercer nivel: multiplicador con signo.
+        \item Página 6. Diagrama de tercer nivel: detalle multiplicador.
+        \item Página 7. Diagrama de tercer nivel circuito sumador y restador.
+        \item Página 8. Diagrama de tercer nivel del circuito quintuplicador.
+    \end{itemize}
 \end{comment}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%
 
 \begin{thebibliography}{1}
 
