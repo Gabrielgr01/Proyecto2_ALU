@@ -14,7 +14,7 @@ Operaciones:
 - Suma con signo
 - Multiplicación con signo
 - Resta con signo
-- Quintuplicador
+- Quintuplicador con signo
 
 Salidas:
 - Resultado númerico en complemento a 2
