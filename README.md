@@ -18,7 +18,7 @@ Operaciones:
 
 Salidas:
 - Resultado númerico en complemento a 2
-- Bandera de si el resultado es cero
+- Bandera de cero
 - Bandera de paridad par
 - Bandera de desbordamiento (Overflow)
 
